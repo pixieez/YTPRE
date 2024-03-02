@@ -11,8 +11,8 @@
 // @icon https://www.google.com/s2/favicons?sz=64&domain=YouTube.com
 // @grant none
 // @licenseMIT
-// @downloadURL https://update.greasyfork.org/scripts/459541/YouTube%E5%8E%BB%E5%B9%BF%E5%91%8A.user.js
-// @updateURL https://update.greasyfork.org/scripts/459541/YouTube%E5%8E%BB%E5%B9%BF%E5%91%8A.meta.js
+// @downloadURL https://github.com/pixieez/YTPRE/raw/main/yt-ad-block.user.js
+// @updateURL https://github.com/pixieez/YTPRE/raw/main/yt-ad-block.user.js
 // ==/UserScript==
 (function() {
      `use strict`;
