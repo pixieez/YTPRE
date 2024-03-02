@@ -1,14 +1,14 @@
 // ==UserScript==
-// @name YouTube remove ads YouTube AD Blocker
-// @namespace https://github.com/iamfugui/YouTubeADB
-// @version 6.01
+// @name YouTubeADsBlocker
+// @namespace https://github.com/pixieez
+// @version 1.0
 // @description No ads OP
-// @author iamfugui
+// @author https://github.com/pixieez
 // @match *://*.youtube.com/*
 // @exclude *://accounts.youtube.com/*
 // @exclude *://www.youtube.com/live_chat_replay*
 // @exclude *://www.youtube.com/persist_identity*
-// @icon https://www.google.com/s2/favicons?sz=64&domain=YouTube.com
+// @icon https://raw.githubusercontent.com/pixieez/GGNTW/main/icon.png
 // @grant none
 // @licenseMIT
 // @downloadURL https://github.com/pixieez/YTPRE/raw/main/yt-ad-block.user.js
