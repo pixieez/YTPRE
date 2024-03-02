@@ -2,7 +2,7 @@
 // @name YouTubePremium (not real LOL)
 // @namespace https://github.com/pixieez
 // @version 1.0
-// @description No ads OP
+// @description YT OP
 // @author https://github.com/pixieez
 // @match *://*.youtube.com/*
 // @exclude *://accounts.youtube.com/*
@@ -10,8 +10,8 @@
 // @exclude *://www.youtube.com/persist_identity*
 // @icon https://raw.githubusercontent.com/pixieez/pixieez/main/icon.png
 // @grant none
-// @downloadURL https://github.com/pixieez/YTPRE/raw/main/yt-ad-block.user.js
-// @updateURL https://github.com/pixieez/YTPRE/raw/main/yt-ad-block.user.js
+// @downloadURL https://github.com/pixieez/YTPRE/raw/main/yt-pre.user.js
+// @updateURL https://github.com/pixieez/YTPRE/raw/main/yt-pre.user.js
 // ==/UserScript==
 
 (function() {
