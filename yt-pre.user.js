@@ -6039,3 +6039,70 @@ function getPlayer() {
 
 
 })();
+(function(){
+  const SCRIPTID = 'YouTubeCpuTamer';
+  console.log(SCRIPTID, location.href);
+  const BUNDLEDINTERVAL    =     250;/* the bundled interval */
+  const BACKGROUNDINTERVAL = 15*1000;/* take even longer interval on hidden tab */
+  const ITIALIZINGTIME     = 10*1000;/* timeouts should be passed on initial load */
+  /*
+    [interval]
+  */
+  /* integrate each of intervals */
+  /* bundle intervals */
+  const originalSetInterval = window.setInterval.bind(window);
+  window.setInterval = function(f, interval, ...args){
+    //console.log(SCRIPTID, 'original interval:', interval, location.href);
+    bundle[index] = {
+      f: f.bind(null, ...args),
+      interval: interval,
+      lastExecution: 0,
+    };
+    return index++;
+  };
+  window.clearInterval = function(id){
+    //console.log(SCRIPTID, 'clearInterval:', id, location.href);
+    delete bundle[id];
+  };
+  /*
+    [timeout]
+  */
+  /* kill the background timeouts after initializing */
+  const originalSetTimeout = window.setTimeout.bind(window);
+  originalSetTimeout(() => {
+    window.setTimeout = function(f, timeout, ...args){
+      //console.log(SCRIPTID, 'timeout:', timeout, location.href);
+      if(document.hidden){
+        bundle[index] = {
+          f: f.bind(null, ...args),
+          timeout: timeout,
+          lastExecution: 0,
+        };
+        return index++;
+      }
+      return originalSetTimeout(f, timeout, ...args);
+    };
+  } , ITIALIZINGTIME);
+  /*
+    [bundled process]
+  */
+  /* execute bundled intervals */
+  /* a bunch of intervals does cost so much even if the processes do nothing */
+  const bundle = {};/* {0: {f, interval, lastExecution}} */
+  let index = 1;/* use it instead of interval id */
+  let lastExecution = 0;
+  originalSetInterval(function(){
+    const now = Date.now();
+    if(document.hidden && now < lastExecution + BACKGROUNDINTERVAL) return true;
+    //console.log(SCRIPTID, 'bundle:', bundle, location.href);
+    Object.keys(bundle).forEach(id => {
+      const item = bundle[id];
+      if(item === undefined) return true;/* it could be occur on tiny deletion chance */
+      if(now < item.lastExecution + (item.interval || item.timeout)) return true;/* not yet */
+      item.f();
+      if(item.interval !== undefined) item.lastExecution = now;
+      else delete bundle[id];
+    });
+    lastExecution = now;
+  }, BUNDLEDINTERVAL);
+})();
