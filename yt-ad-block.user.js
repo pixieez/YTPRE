@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name YouTubeADsBlocker
+// @name YouTubePremium (not real LOL)
 // @namespace https://github.com/pixieez
 // @version 1.0
 // @description No ads OP
@@ -10,7 +10,6 @@
 // @exclude *://www.youtube.com/persist_identity*
 // @icon https://raw.githubusercontent.com/pixieez/pixieez/main/icon.png
 // @grant none
-// @licenseMIT
 // @downloadURL https://github.com/pixieez/YTPRE/raw/main/yt-ad-block.user.js
 // @updateURL https://github.com/pixieez/YTPRE/raw/main/yt-ad-block.user.js
 // ==/UserScript==
