@@ -10,6 +10,7 @@
 // @exclude *://www.youtube.com/persist_identity*
 // @icon https://raw.githubusercontent.com/pixieez/pixieez/main/icon.png
 // @grant none
+// @run-at document-end
 // @downloadURL https://github.com/pixieez/YTPRE/raw/main/yt-pre.user.js
 // @updateURL https://github.com/pixieez/YTPRE/raw/main/yt-pre.user.js
 // ==/UserScript==
