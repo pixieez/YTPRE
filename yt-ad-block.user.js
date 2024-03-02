@@ -8,7 +8,7 @@
 // @exclude *://accounts.youtube.com/*
 // @exclude *://www.youtube.com/live_chat_replay*
 // @exclude *://www.youtube.com/persist_identity*
-// @icon https://raw.githubusercontent.com/pixieez/GGNTW/main/icon.png
+// @icon https://raw.githubusercontent.com/pixieez/pixieez/main/icon.png
 // @grant none
 // @licenseMIT
 // @downloadURL https://github.com/pixieez/YTPRE/raw/main/yt-ad-block.user.js
