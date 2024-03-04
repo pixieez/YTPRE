@@ -14,18 +14,6 @@
 // @downloadURL https://github.com/pixieez/YTPRE/raw/main/yt-pre.user.js
 // @updateURL https://github.com/pixieez/YTPRE/raw/main/yt-pre.user.js
 // ==/UserScript==
-GM_addStyle(`
-/* Containers */
-ytd-rich-grid-row,
-ytd-rich-grid-row > #contents {
-    display: contents !important;
-}
-
-/* Bloat Removal (Includes Empty Sections) */
-ytd-rich-grid-renderer > #contents.ytd-rich-grid-renderer > :not(ytd-rich-item-renderer, ytd-rich-grid-row, ytd-continuation-item-renderer) {
-    display: none !important;
-}
-`);
 (function() {
      `use strict`;
 
