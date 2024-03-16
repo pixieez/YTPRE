@@ -290,3 +290,97 @@
      }
 
 })();
+ // Configuration
+  const MAX_QUALITY = "2160p"; // Maximum video quality to buffer (change as needed)
+  const BASS_BOOST_LEVEL = 3; // Bass boost level (adjust as needed)
+
+  // Entry point
+  window.addEventListener("DOMContentLoaded", main);
+
+  function main() {
+    const player = getPlayer();
+    player.addEventListener("onStateChange", function (event) {
+      if (event.data === 1) {
+        updateSettings(player);
+      }
+    });
+  }
+
+  function updateSettings(player) {
+    try {
+      if (!isPlayerAvailable(player)) {
+        throw new Error("YouTube player not available.");
+      }
+
+      const currentQuality = player.getPlaybackQuality();
+      const currentAudioQuality = player.getPlaybackRate();
+
+      if (currentQuality !== MAX_QUALITY || currentAudioQuality === null) {
+        const availableQualities = player.getAvailableQualityLevels();
+        const targetQualityIndex = availableQualities.indexOf(MAX_QUALITY);
+        if (targetQualityIndex !== -1) {
+          const targetQuality = availableQualities[targetQualityIndex];
+          player.setPlaybackQuality(targetQuality);
+        } else {
+          throw new Error(`Target quality '${MAX_QUALITY}' not available.`);
+        }
+      }
+
+      if (currentAudioQuality === null) {
+        const availableAudioQualities = player.getAvailablePlaybackRates();
+        const targetAudioQualityIndex = findBestAudioQualityIndex(availableAudioQualities);
+        if (targetAudioQualityIndex !== -1) {
+          const targetAudioQuality = availableAudioQualities[targetAudioQualityIndex];
+          player.setPlaybackRate(targetAudioQuality);
+        } else {
+          throw new Error("No available audio qualities found.");
+        }
+      }
+
+      setBassBoost(player, BASS_BOOST_LEVEL);
+    } catch (error) {
+      console.error("An error occurred:", error.message);
+    }
+  }
+
+  function isPlayerAvailable(player) {
+    return (
+      player &&
+      /https:\/\/www\.youtube\.com\/watch\?v=.*/.test(window.location.href) &&
+      document.getElementById("live-chat-iframe") === null
+    );
+  }
+
+  function findBestAudioQualityIndex(availableAudioQualities) {
+    // Find the index of the highest available audio quality
+    let maxQualityIndex = -1;
+    let maxQuality = -Infinity;
+    availableAudioQualities.forEach((quality, index) => {
+      const qualityNumber = Number(quality);
+      if (!isNaN(qualityNumber) && qualityNumber > maxQuality) {
+        maxQuality = qualityNumber;
+        maxQualityIndex = index;
+      }
+    });
+    return maxQualityIndex;
+  }
+
+  function setBassBoost(player, level) {
+    const bassBoostEffect = {
+      name: "bassBoost",
+      parameters: {
+        gain: level,
+      },
+    };
+    player.applyFilter(bassBoostEffect);
+  }
+
+  function getPlayer() {
+    const player = document.getElementById("movie_player");
+    if (!player) {
+      throw new Error("YouTube player not found.");
+    }
+    return player;
+  }
+
+})();
